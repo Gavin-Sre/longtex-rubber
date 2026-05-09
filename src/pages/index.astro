@@ -66,12 +66,31 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 			}
 		</style>
 
-		<!-- About (scroll-reveal) -->
+		<!-- About snippet: keyword-rich summary linking to full /about/ page -->
 		<ScrollReveal>
-			<Section id="about" title="Who we are">
-				<p class="m-0 text-[1.0625rem] leading-[1.7] text-muted">
-					We combine industry experience with a focus on quality and reliability. From silicone and talcum coatings to food-grade and specialized threads, we deliver extruded rubber solutions that meet demanding applications worldwide.
+			<Section id="about" title="Who We Are">
+				<p class="m-0 text-[1.0625rem] leading-[1.7] text-text-muted">
+					Founded in <strong class="text-text">1984</strong>, Longtex Rubber Industry Co., Ltd. is a Thailand-based manufacturer and global exporter of high-quality extruded natural rubber threads. With a production capacity of <strong class="text-text">1,500 tons per month</strong>, we supply silicone-coated, talcum-coated, food-grade, and specialized rubber threads to textile, medical, sports, and industrial customers worldwide. Our products are certified to <strong class="text-text">ISO and OekoTex international standards</strong>, backed by 40+ years of manufacturing expertise and a commitment to sustainable, renewable-energy-powered production.
 				</p>
+				<div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+					{[
+						{ value: "1984", label: "Established" },
+						{ value: "1,500t", label: "Monthly Capacity" },
+						{ value: "ISO", label: "OekoTex Certified" },
+						{ value: "40+", label: "Years of Expertise" },
+					].map(stat => (
+						<div class="rounded-xl border border-white/[0.06] bg-surface p-4 text-center">
+							<div class="text-2xl font-bold text-accent">{stat.value}</div>
+							<div class="mt-1 text-xs font-medium uppercase tracking-wide text-text-muted">{stat.label}</div>
+						</div>
+					))}
+				</div>
+				<div class="mt-8">
+					<a href={`${baseUrl}about/`} class="inline-flex items-center gap-2 text-[0.9375rem] font-semibold text-accent no-underline hover:underline">
+						Learn more about us
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+					</a>
+				</div>
 			</Section>
 		</ScrollReveal>
 

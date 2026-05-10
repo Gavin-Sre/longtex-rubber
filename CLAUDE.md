@@ -1,6 +1,15 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code and any delegated subagents working in this repository. **Read this entire file before starting any task in this project — including PR creation, doc research, code changes, and reviews.**
+
+## Primary Goal: SEO Optimization
+
+**Every code change, content edit, PR description, and recommendation must be evaluated against its SEO impact.** This is the single most important objective for this project. When in doubt between two approaches, always choose the one that is better for search engine discoverability, crawlability, and ranking.
+
+This applies to all contexts:
+- **Main Claude sessions** — apply SEO rules (below) to every file touched
+- **Subagents (pr-helper, doc-scanner, etc.)** — when summarizing changes or researching, surface SEO implications; flag anything that could hurt rankings
+- **Reviews and PR descriptions** — call out SEO wins, regressions, or gaps explicitly
 
 ## Project Overview
 
@@ -8,10 +17,6 @@ Corporate B2B marketing website for **Longtex Rubber Industry Co., Ltd.**, a Tha
 
 - **Deployed at:** `https://gavin-sre.github.io/longtex-rubber/`
 - **Repository:** `gavin-sre/longtex-rubber` on GitHub Pages
-
-## Primary Goal: SEO Optimization
-
-**Every code change must be evaluated against its SEO impact.** This is the single most important objective for this project. When in doubt between two approaches, always choose the one that is better for search engine discoverability, crawlability, and ranking.
 
 ## Tech Stack
 

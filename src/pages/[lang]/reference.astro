@@ -1,14 +1,29 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import ScrollToTop from "../components/ScrollToTop.astro";
-import Section from "../components/Section.astro";
-import ReferenceSpecTable from "../components/ReferenceSpecTable.astro";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ScrollToTop from "../../components/ScrollToTop.astro";
+import Section from "../../components/Section.astro";
+import ReferenceSpecTable from "../../components/ReferenceSpecTable.astro";
+import type { Locale } from "../../i18n/locales";
+import { useTranslations } from "../../i18n/utils";
 
-const threadYieldHeaders = ["SIZE", "DIA. (mm)", "DIA. (in)", "AREA (mm²)", "YIELD (m/kg)", "YIELD (yd/lb)"];
+export function getStaticPaths() {
+	return (["en", "th", "zh"] as const).map((lang) => ({ params: { lang } }));
+}
 
-/** Values transcribed from legacy Longtex reference HTML. */
+const lang = Astro.params.lang as Locale;
+const t = useTranslations(lang);
+
+const threadYieldHeaders = [
+	t.reference.headers.size,
+	t.reference.headers.diaMm,
+	t.reference.headers.diaIn,
+	t.reference.headers.area,
+	t.reference.headers.yieldMkg,
+	t.reference.headers.yieldYdLb,
+];
+
 const threadYieldRows: string[][] = [
 	["20", "1.270", "0.050", "1.267", "777.932", "383.917"],
 	["22", "1.115", "0.045", "1.047", "936.458", "464.539"],
@@ -45,41 +60,38 @@ const conversionRows: string[][] = [
 ---
 
 <Layout
-	title="Technical Reference | Longtex Rubber Thread"
-	description="Size, diameter, area, and yield reference for Longtex natural rubber threads (density basis as published)."
-	keywords="rubber thread size chart, thread yield m/kg, rubber thread diameter reference, Longtex specifications"
+	lang={lang}
+	title={t.reference.seo.title}
+	description={t.reference.seo.description}
+	keywords={t.reference.seo.keywords}
 >
-	<Header />
+	<Header lang={lang} />
 
 	<main>
 		<section class="relative flex min-h-[200px] items-center justify-center bg-surface px-6 py-12 text-center">
-			<h1 class="text-3xl font-bold tracking-tight text-white md:text-4xl">Reference</h1>
+			<h1 class="text-3xl font-bold tracking-tight text-white md:text-4xl">{t.reference.pageTitle}</h1>
 		</section>
 
-		<Section id="thread-yield" class="scroll-mt-24" title="Thread sizing & yield" alt wide>
+		<Section id="thread-yield" class="scroll-mt-24" title={t.reference.section.title} alt wide>
 			<p class="mb-6 text-[1.0625rem] leading-[1.7] text-muted">
-				Legacy technical table for extruded rubber thread: count (size), diameters, cross-sectional area, and yield. Values are
-				as published for planning and conversion; confirm critical dimensions with your Longtex representative.
+				{t.reference.section.intro}
 			</p>
 			<h3 class="mx-auto mb-1 max-w-[900px] text-center text-[20px] font-bold leading-tight text-text">
-				Size, Diameter, and Yield of Longtex's Threads
+				{t.reference.section.tableTitle}
 			</h3>
 			<p class="mx-auto mb-3 max-w-[900px] text-right text-sm font-bold text-text">
-				Density = 1.02(g/mm²)
+				{t.reference.section.density}
 			</p>
 			<ReferenceSpecTable headers={threadYieldHeaders} rows={threadYieldRows} />
 
 			<div id="conversion" class="mx-auto mt-14 max-w-[900px] scroll-mt-24 border-t border-white/10 pt-12">
-				<h3 class="mb-4 text-center text-[20px] font-bold leading-tight text-text">Conversion Table</h3>
+				<h3 class="mb-4 text-center text-[20px] font-bold leading-tight text-text">{t.reference.section.conversionTitle}</h3>
 				<ReferenceSpecTable rows={conversionRows} />
 			</div>
 		</Section>
 	</main>
 
-	<Footer
-		copyright="© YEAR Longtex Rubber Industry Co., Ltd."
-		address="121/32 Moo 8 Soi Suksawad 74, Suksawad Rd., Bangkru, Prapradaeng, Samutprakarn 10130 Thailand."
-	/>
+	<Footer lang={lang} />
 
-	<ScrollToTop />
+	<ScrollToTop lang={lang} />
 </Layout>

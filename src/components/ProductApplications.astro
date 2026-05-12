@@ -1,4 +1,15 @@
 ---
+import type { Locale } from "../i18n/locales";
+import { defaultLocale } from "../i18n/locales";
+import { useTranslations } from "../i18n/utils";
+
+interface Props {
+	lang?: Locale;
+}
+
+const { lang = defaultLocale } = Astro.props;
+const t = useTranslations(lang);
+
 interface ApplicationItem {
 	title: string;
 	description: string;
@@ -7,33 +18,11 @@ interface ApplicationItem {
 }
 
 const applications: ApplicationItem[] = [
-	{
-		title: "Sports Industry",
-		description: "Waist straps, compression tights, bungee cords, and performance sportswear that demands consistent elasticity under repeated stress.",
-		icon: "sports",
-		span: "wide",
-	},
-	{
-		title: "Food Industry",
-		description: "Food-grade rubber for meat netting, chicken loops, and packaging where safety and hygiene compliance are non-negotiable.",
-		icon: "food",
-		span: "wide",
-	},
-	{
-		title: "Socks Top",
-		description: "Fine counts of rubber thread engineered for sock cuffs with lasting hold.",
-		icon: "socks",
-	},
-	{
-		title: "Packaging",
-		description: "Braids and cords built for multi-purpose industrial and retail packaging applications.",
-		icon: "packaging",
-	},
-	{
-		title: "Medical Products",
-		description: "Surgical masks, orthopedic knits, compression stockings, and medical-grade elastic goods.",
-		icon: "medical",
-	},
+	{ title: t.applications.sports.title, description: t.applications.sports.description, icon: "sports", span: "wide" },
+	{ title: t.applications.food.title, description: t.applications.food.description, icon: "food", span: "wide" },
+	{ title: t.applications.socks.title, description: t.applications.socks.description, icon: "socks" },
+	{ title: t.applications.packaging.title, description: t.applications.packaging.description, icon: "packaging" },
+	{ title: t.applications.medical.title, description: t.applications.medical.description, icon: "medical" },
 ];
 ---
 
@@ -84,7 +73,6 @@ const applications: ApplicationItem[] = [
 </div>
 
 <style>
-	/* Initial hidden state and keyframe — cannot be expressed with Tailwind utility classes */
 	.bento-card {
 		opacity: 0;
 		transform: translateY(1rem);

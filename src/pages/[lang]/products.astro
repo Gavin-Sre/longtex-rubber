@@ -1,25 +1,34 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import ScrollToTop from "../components/ScrollToTop.astro";
-import Section from "../components/Section.astro";
-import ProductSection from "../components/ProductSection.astro";
-import ProductApplications from "../components/ProductApplications.astro";
-import ScrollReveal from "../components/ScrollReveal.astro";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ScrollToTop from "../../components/ScrollToTop.astro";
+import Section from "../../components/Section.astro";
+import ProductSection from "../../components/ProductSection.astro";
+import ProductApplications from "../../components/ProductApplications.astro";
+import ScrollReveal from "../../components/ScrollReveal.astro";
+import type { Locale } from "../../i18n/locales";
+import { useTranslations } from "../../i18n/utils";
 
+export function getStaticPaths() {
+	return (["en", "th", "zh"] as const).map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const t = useTranslations(lang);
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+
 const talcumImages = [`${baseUrl}talcum-coated-1.jpg`, `${baseUrl}talcum-coated-2.jpg`, `${baseUrl}talcum-coated-3.jpg`];
 const siliconeImages = [`${baseUrl}silicone-coated-1.jpg`, `${baseUrl}silicone-coated-2.jpg`, `${baseUrl}silicone-coated-3.jpg`];
 const foodGradeImages = [`${baseUrl}food-grade-rubber-1.jpg`, `${baseUrl}food-grade-rubber-2.jpg`, `${baseUrl}food-grade-rubber-3.jpg`];
 
 const talcumHeaderRow1 = [
-	{ text: "Count", rowspan: 2 },
-	{ text: "Packaging (kg./box)", colspan: 5 },
-	{ text: "Color", colspan: 2 },
-	{ text: "Elongation At Break", rowspan: 2 },
+	{ text: t.products.table.count, rowspan: 2 },
+	{ text: t.products.table.packaging, colspan: 5 },
+	{ text: t.products.table.color, colspan: 2 },
+	{ text: t.products.table.elongation, rowspan: 2 },
 ];
-const talcumHeaderRow2 = ["20", "23", "25", "32", "34", "Black", "White"];
+const talcumHeaderRow2 = ["20", "23", "25", "32", "34", t.products.table.black, t.products.table.white];
 const talcumRows = [
 	{ count: "20-28", cells: [false, false, true, true, true, true, true, ">680%"] },
 	{ count: "30-75", cells: [false, false, true, true, true, true, true, ">680%"] },
@@ -28,22 +37,22 @@ const talcumRows = [
 ];
 
 const siliconeHeaderRow1 = [
-	{ text: "Count", rowspan: 2 },
-	{ text: "Packaging (kg./box)", colspan: 5 },
-	{ text: "Color", colspan: 2 },
-	{ text: "Elongation At Break", rowspan: 2 },
+	{ text: t.products.table.count, rowspan: 2 },
+	{ text: t.products.table.packaging, colspan: 5 },
+	{ text: t.products.table.color, colspan: 2 },
+	{ text: t.products.table.elongation, rowspan: 2 },
 ];
-const siliconeHeaderRow2 = ["20", "23", "25", "32", "34", "Black", "White"];
+const siliconeHeaderRow2 = ["20", "23", "25", "32", "34", t.products.table.black, t.products.table.white];
 const siliconeRows = [
 	{ count: "20-28", cells: [false, true, false, true, false, true, true, ">680%"] },
 	{ count: "30-55", cells: [false, true, false, true, false, true, true, ">680%"] },
 ];
 
 const foodGradeHeaderRow1 = [
-	{ text: "Count", rowspan: 2 },
-	{ text: "Packaging (kg./box)", colspan: 5 },
-	{ text: "Color", colspan: 1 },
-	{ text: "Elongation At Break", rowspan: 2 },
+	{ text: t.products.table.count, rowspan: 2 },
+	{ text: t.products.table.packaging, colspan: 5 },
+	{ text: t.products.table.color, colspan: 1 },
+	{ text: t.products.table.elongation, rowspan: 2 },
 ];
 const foodGradeHeaderRow2 = ["20", "23", "25", "32", "34"];
 const foodGradeRows = [
@@ -53,22 +62,22 @@ const foodGradeRows = [
 ---
 
 <Layout
-	title="Our Products | Natural Rubber Thread | Longtex"
-	description="Leading Thailand natural rubber thread manufacturer. Talcum coated, silicone coated, and food grade extruded rubber threads. Count 20–110, ISO certified."
-	keywords="talcum coated rubber thread, silicone rubber thread, food grade rubber thread, natural latex thread Thailand"
+	lang={lang}
+	title={t.products.seo.title}
+	description={t.products.seo.description}
+	keywords={t.products.seo.keywords}
 >
-	<Header />
+	<Header lang={lang} />
 
 	<main>
-		<!-- Sub-header: page title -->
 		<section class="relative flex min-h-[200px] items-center justify-center bg-surface px-6 py-12 text-center">
-			<h1 class="text-3xl font-bold tracking-tight text-white md:text-4xl">Our Products</h1>
+			<h1 class="text-3xl font-bold tracking-tight text-white md:text-4xl">{t.products.pageTitle}</h1>
 		</section>
 
 		<div class="mx-auto max-w-4xl px-6 py-8">
 			<ProductSection
 				id="talcum"
-				title="Talcum Coated"
+				title={t.products.sections.talcum}
 				images={talcumImages}
 				tableHeaderRow1={talcumHeaderRow1}
 				tableHeaderRow2={talcumHeaderRow2}
@@ -76,7 +85,7 @@ const foodGradeRows = [
 			/>
 			<ProductSection
 				id="silicone"
-				title="Silicone Coated"
+				title={t.products.sections.silicone}
 				images={siliconeImages}
 				tableHeaderRow1={siliconeHeaderRow1}
 				tableHeaderRow2={siliconeHeaderRow2}
@@ -84,48 +93,39 @@ const foodGradeRows = [
 			/>
 			<ProductSection
 				id="foodgrade"
-				title="Food Grade Rubber"
+				title={t.products.sections.foodgrade}
 				images={foodGradeImages}
 				tableHeaderRow1={foodGradeHeaderRow1}
 				tableHeaderRow2={foodGradeHeaderRow2}
 				tableRows={foodGradeRows}
 			/>
-			<ProductSection id="specialized" title="Specialized Threads" placeholder />
+			<ProductSection id="specialized" title={t.products.sections.specialized} placeholder placeholderText={t.products.placeholderText} />
 		</div>
 
-		<!-- Product Applications -->
 		<div id="papp" class="scroll-mt-24"></div>
 		<ScrollReveal>
-			<Section id="applications" class="scroll-mt-24" title="Product Applications" wide>
-				<ProductApplications />
+			<Section id="applications" class="scroll-mt-24" title={t.products.applicationsTitle} wide>
+				<ProductApplications lang={lang} />
 			</Section>
 		</ScrollReveal>
 
-		<!-- Storage tips -->
 		<ScrollReveal>
-			<Section title="How to Properly Store Extruded Rubber Threads" alt wide>
+			<Section title={t.products.storage.title} alt wide>
 				<p class="mb-6 font-medium text-text">
-					To maintain the longevity and optimal performance of our extruded rubber threads, it is crucial to adopt proper storage practices.
+					{t.products.storage.intro}
 				</p>
 				<ul class="list-inside list-disc space-y-2 text-text-muted">
-					<li>Store extruded rubber threads in a stable environment with consistent temperature and humidity, recommended between 15 to 25 degrees Celsius.</li>
-					<li>Shield threads from direct sunlight to prevent adverse effects on their properties.</li>
-					<li>Limit stacking to no more than four layers to avoid deformation and maintain the original form.</li>
-					<li>Follow a &lsquo;first in, first out&rsquo; approach for inventory management to ensure freshness.</li>
-					<li>Refrain from mixing batches during storage to preserve consistent quality.</li>
-					<li>Utilize the product within four months for optimal quality.</li>
-					<li>Keep storage boxes upright to prevent any mishandling or damage.</li>
+					{t.products.storage.tips.map((tip) => (
+						<li>{tip}</li>
+					))}
 				</ul>
 			</Section>
 		</ScrollReveal>
 	</main>
 
-	<Footer
-		copyright="© YEAR Longtex Rubber Industry Co., Ltd."
-		address="121/32 Moo 8 Soi Suksawad 74, Suksawad Rd., Bangkru, Prapradaeng, Samutprakarn 10130 Thailand."
-	/>
+	<Footer lang={lang} />
 
-	<ScrollToTop />
+	<ScrollToTop lang={lang} />
 </Layout>
 
 <script>

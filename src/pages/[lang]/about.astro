@@ -1,0 +1,219 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ScrollToTop from "../../components/ScrollToTop.astro";
+import ScrollReveal from "../../components/ScrollReveal.astro";
+import Button from "../../components/Button.astro";
+import type { Locale } from "../../i18n/locales";
+import { useTranslations, localizePath } from "../../i18n/utils";
+
+export function getStaticPaths() {
+	return (["en", "th", "zh"] as const).map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const t = useTranslations(lang);
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+const siteOrigin = "https://gavin-sre.github.io/longtex-rubber";
+
+const aboutPath = localizePath(lang, "about/");
+const homePath = localizePath(lang, "");
+
+const breadcrumbSchema = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{ "@type": "ListItem", "position": 1, "name": t.about.breadcrumbHome, "item": `${siteOrigin}${homePath}` },
+		{ "@type": "ListItem", "position": 2, "name": t.about.breadcrumbAbout, "item": `${siteOrigin}${aboutPath}` },
+	],
+};
+
+const sections = [
+	{
+		id: "mission",
+		eyebrow: t.about.sections.mission.eyebrow,
+		title: t.about.sections.mission.title,
+		body: t.about.sections.mission.body,
+		quote: t.about.sections.mission.quote,
+		quoteLabel: t.about.sections.mission.quoteLabel,
+		image: "teamphoto.jpeg",
+		imageAlt: t.about.sections.mission.imageAlt,
+		imageWidth: 2400,
+		imageHeight: 2693,
+		objectPosition: "object-center",
+	},
+	{
+		id: "capacity",
+		eyebrow: t.about.sections.capacity.eyebrow,
+		title: t.about.sections.capacity.title,
+		body: t.about.sections.capacity.body,
+		image: "tanks.png",
+		imageAlt: t.about.sections.capacity.imageAlt,
+		imageWidth: 4032,
+		imageHeight: 3024,
+		objectPosition: "object-center",
+	},
+	{
+		id: "rd",
+		eyebrow: t.about.sections.rd.eyebrow,
+		title: t.about.sections.rd.title,
+		body: t.about.sections.rd.body,
+		image: "research.jpg",
+		imageAlt: t.about.sections.rd.imageAlt,
+		imageWidth: 2400,
+		imageHeight: 2693,
+		objectPosition: "object-center",
+	},
+	{
+		id: "standards",
+		eyebrow: t.about.sections.standards.eyebrow,
+		title: t.about.sections.standards.title,
+		body: t.about.sections.standards.body,
+		image: "safety.jpeg",
+		imageAlt: t.about.sections.standards.imageAlt,
+		imageWidth: 2400,
+		imageHeight: 2693,
+		objectPosition: "object-center",
+	},
+	{
+		id: "green",
+		eyebrow: t.about.sections.green.eyebrow,
+		title: t.about.sections.green.title,
+		body: t.about.sections.green.body,
+		image: "solarcell.jpeg",
+		imageAlt: t.about.sections.green.imageAlt,
+		imageWidth: 2400,
+		imageHeight: 1743,
+		objectPosition: "object-center",
+	},
+];
+---
+
+<Layout
+	lang={lang}
+	title={t.about.seo.title}
+	description={t.about.seo.description}
+	keywords={t.about.seo.keywords}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
+
+	<Header lang={lang} />
+
+	<main>
+		<section class="relative overflow-hidden border-b border-white/[0.06] bg-surface px-6 py-20">
+			<div
+				aria-hidden="true"
+				class="absolute -top-32 left-1/2 h-[480px] w-[820px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px]"
+			/>
+			<div class="relative mx-auto max-w-[760px] text-center">
+				<p class="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-accent">{t.about.hero.eyebrow}</p>
+				<h1 class="mb-5 text-[clamp(2.25rem,4.5vw,3.25rem)] font-bold leading-[1.1] tracking-tight text-text">
+					{t.about.hero.titleLine1}
+					<span class="bg-gradient-to-r from-accent to-accent/60 bg-clip-text text-transparent">{t.about.hero.titleLine2}</span>
+				</h1>
+				<p class="mx-auto max-w-[640px] text-[1.0625rem] leading-[1.7] text-text-muted">
+					{t.about.hero.body}
+				</p>
+			</div>
+		</section>
+
+		<ScrollReveal>
+			<section class="border-b border-white/[0.06] px-6 py-12">
+				<div class="mx-auto grid max-w-[960px] grid-cols-2 gap-4 sm:grid-cols-4">
+					{[
+						{ value: "1984", label: t.about.stats.yearFounded },
+						{ value: "1,500t", label: t.about.stats.capacity },
+						{ value: "40+", label: t.about.stats.expertise },
+						{ value: "ISO", label: t.about.stats.certified },
+					].map(stat => (
+						<div class="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-surface p-5 text-center transition-colors duration-300 hover:border-accent/40">
+							<div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent opacity-50" />
+							<div class="text-[1.75rem] font-bold tracking-tight text-accent sm:text-3xl">{stat.value}</div>
+							<div class="mt-1 text-xs font-medium uppercase tracking-wider text-text-muted">{stat.label}</div>
+						</div>
+					))}
+				</div>
+			</section>
+		</ScrollReveal>
+
+		{sections.map((section, i) => {
+			const imageRight = i % 2 === 0;
+			return (
+				<ScrollReveal>
+					<section
+						id={section.id}
+						class={`scroll-mt-20 px-6 py-20 ${i % 2 !== 0 ? "bg-surface" : ""}`}
+					>
+						<div class="mx-auto grid max-w-[1100px] items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+							<div class={`group relative ${imageRight ? "lg:order-2" : "lg:order-1"}`}>
+								<div
+									aria-hidden="true"
+									class="absolute -inset-6 -z-10 rounded-[2rem] bg-accent/15 opacity-40 blur-3xl transition-opacity duration-700 group-hover:opacity-70"
+								/>
+								<div
+									aria-hidden="true"
+									class="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl border border-accent/40 transition-transform duration-500 group-hover:translate-x-4 group-hover:translate-y-4 motion-reduce:transition-none motion-reduce:group-hover:translate-x-3 motion-reduce:group-hover:translate-y-3"
+								/>
+								<div class="relative overflow-hidden rounded-2xl shadow-2xl shadow-black/40 ring-1 ring-white/[0.06]">
+									<img
+										src={`${baseUrl}${section.image}`}
+										alt={section.imageAlt}
+										width={section.imageWidth}
+										height={section.imageHeight}
+										loading="lazy"
+										decoding="async"
+										class={`aspect-[4/3] w-full ${section.objectPosition} object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100`}
+									/>
+									<div
+										aria-hidden="true"
+										class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-bg/40 via-transparent to-transparent"
+									/>
+								</div>
+							</div>
+
+							<div class={`${imageRight ? "lg:order-1" : "lg:order-2"}`}>
+								<p class="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">{section.eyebrow}</p>
+								<div class="mb-5 h-[3px] w-10 rounded-full bg-accent" />
+								<h2 class="mb-6 text-[clamp(1.5rem,2.6vw,1.875rem)] font-bold tracking-tight text-text">
+									{section.title}
+								</h2>
+								{section.body.split("\n\n").map(para => (
+									<p class="mb-4 text-[1.0625rem] leading-[1.7] text-text-muted last:mb-0">{para}</p>
+								))}
+								{section.quote && (
+									<blockquote class="mt-7 rounded-xl border border-accent/20 bg-accent/[0.06] px-6 py-5">
+										<p class="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent">{section.quoteLabel}</p>
+										<p class="m-0 text-[1rem] font-medium leading-[1.7] text-text">{section.quote}</p>
+									</blockquote>
+								)}
+							</div>
+						</div>
+					</section>
+				</ScrollReveal>
+			);
+		})}
+
+		<ScrollReveal>
+			<section class="relative overflow-hidden border-t border-white/[0.06] px-6 py-20 text-center">
+				<div
+					aria-hidden="true"
+					class="absolute left-1/2 top-1/2 -z-10 h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-[120px]"
+				/>
+				<div class="mx-auto max-w-[640px]">
+					<h2 class="mb-3 text-[clamp(1.5rem,2.6vw,1.875rem)] font-bold tracking-tight text-text">{t.about.cta.title}</h2>
+					<p class="mb-8 text-[1.0625rem] leading-[1.7] text-text-muted">
+						{t.about.cta.body}
+					</p>
+					<div class="flex flex-wrap justify-center gap-4">
+						<Button href={localizePath(lang, "products/")} size="large">{t.about.cta.primary}</Button>
+						<Button href={`${homePath}#contact`} variant="secondary" size="large">{t.about.cta.secondary}</Button>
+					</div>
+				</div>
+			</section>
+		</ScrollReveal>
+	</main>
+
+	<Footer lang={lang} />
+	<ScrollToTop lang={lang} />
+</Layout>

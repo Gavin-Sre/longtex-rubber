@@ -23,6 +23,8 @@ interface Props {
 	tableRows?: TableRow[];
 	/** Title + optional slot only; no spec table or carousel */
 	placeholder?: boolean;
+	/** Optional override for the placeholder body copy (defaults to English fallback). */
+	placeholderText?: string;
 }
 
 const {
@@ -33,8 +35,10 @@ const {
 	tableHeaderRow2,
 	tableRows = [],
 	placeholder = false,
+	placeholderText = "Specifications and imagery for specialized threads (UV resistance, fire retardancy, custom colors, and more) will be published here soon.",
 } = Astro.props;
-const thClass = "border border-white/20 bg-[#1e3a5f] px-3 py-3 font-bold text-white";
+const thClass = "border border-white/[0.06] bg-white/[0.03] px-4 py-3 text-center text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-text";
+const tdBaseClass = "border border-white/[0.06] px-4 py-3 text-sm";
 ---
 
 <section id={id} class="product-section scroll-mt-24 border-b border-white/10 py-12 first:pt-4" data-product-section>
@@ -43,54 +47,75 @@ const thClass = "border border-white/20 bg-[#1e3a5f] px-3 py-3 font-bold text-wh
 	{placeholder ? (
 		<div class="mx-auto max-w-2xl text-center">
 			<p class="m-0 text-[1.0625rem] leading-[1.7] text-text-muted">
-				Specifications and imagery for specialized threads (UV resistance, fire retardancy, custom colors, and more) will be published here soon.
+				{placeholderText}
 			</p>
 		</div>
 	) : (
 		<>
-	<!-- Table on top -->
-	<div class="overflow-x-auto">
-		<table class="spec-table w-full min-w-[520px] border-collapse text-left text-sm" role="grid">
-			<thead>
-				<tr>
-					{tableHeaderRow1.map((cell) => (
-						<th
-							class={thClass}
-							scope="col"
-							rowspan={cell.rowspan ?? 1}
-							colspan={cell.colspan ?? 1}
-						>
-							{cell.text}
-						</th>
-					))}
-				</tr>
-				{tableHeaderRow2 && tableHeaderRow2.length > 0 && (
-					<tr>
-						{tableHeaderRow2.map((label) => (
-							<th class={thClass} scope="col">
-								{label}
-							</th>
+	<!-- Spec table card -->
+	<div class="overflow-hidden rounded-2xl bg-surface shadow-xl shadow-black/30 ring-1 ring-white/[0.06]">
+		<div class="relative">
+			<div
+				aria-hidden="true"
+				class="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent"
+			/>
+			<div class="overflow-x-auto">
+				<table class="spec-table w-full min-w-[520px] border-collapse text-sm" role="grid">
+					<thead>
+						<tr>
+							{tableHeaderRow1.map((cell) => (
+								<th
+									class={thClass}
+									scope="col"
+									rowspan={cell.rowspan ?? 1}
+									colspan={cell.colspan ?? 1}
+								>
+									{cell.text}
+								</th>
+							))}
+						</tr>
+						{tableHeaderRow2 && tableHeaderRow2.length > 0 && (
+							<tr>
+								{tableHeaderRow2.map((label) => (
+									<th class={thClass} scope="col">
+										{label}
+									</th>
+								))}
+							</tr>
+						)}
+					</thead>
+					<tbody>
+						{tableRows.map((row) => (
+							<tr class="transition-colors duration-150 hover:bg-white/[0.025]">
+								<td class={`${tdBaseClass} font-semibold text-text`}>{row.count}</td>
+								{row.cells.map((cell) => (
+									<td class={`${tdBaseClass} text-center`}>
+										{typeof cell === "boolean" ? (
+											cell ? (
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="mx-auto h-4 w-4 text-accent"
+													viewBox="0 0 20 20"
+													fill="currentColor"
+													aria-label="Available"
+													role="img"
+												>
+													<path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-7.5 7.5a1 1 0 01-1.42 0l-3.5-3.5a1 1 0 011.42-1.42L8.5 12.08l6.79-6.79a1 1 0 011.414 0z" clip-rule="evenodd" />
+												</svg>
+											) : (
+												<span class="text-text-muted/40" aria-label="Not available">—</span>
+											)
+										) : (
+											<span class="text-text-muted">{cell}</span>
+										)}
+									</td>
+								))}
+							</tr>
 						))}
-					</tr>
-				)}
-			</thead>
-			<tbody>
-				{tableRows.map((row, ri) => (
-					<tr class={ri % 2 === 0 ? "bg-white/5" : "bg-white/10"}>
-						<td class="border border-white/20 px-3 py-2 font-medium">{row.count}</td>
-						{row.cells.map((cell) => (
-							<td class="border border-white/20 px-3 py-2 text-center">
-								{typeof cell === "boolean"
-									? cell
-										? "✔"
-										: "–"
-									: cell}
-							</td>
-						))}
-					</tr>
-				))}
-			</tbody>
-		</table>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 
 	<!-- Carousel below -->

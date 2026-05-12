@@ -1,0 +1,174 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Button from "../../components/Button.astro";
+import Section from "../../components/Section.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import ScrollReveal from "../../components/ScrollReveal.astro";
+import ProductApplications from "../../components/ProductApplications.astro";
+import Footer from "../../components/Footer.astro";
+import ScrollToTop from "../../components/ScrollToTop.astro";
+import type { Locale } from "../../i18n/locales";
+import { useTranslations, localizePath } from "../../i18n/utils";
+
+export function getStaticPaths() {
+	return (["en", "th", "zh"] as const).map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const t = useTranslations(lang);
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+---
+
+<Layout
+	lang={lang}
+	title={t.home.seo.title}
+	description={t.home.seo.description}
+	keywords={t.home.seo.keywords}
+>
+	<Header lang={lang} />
+
+	<main>
+		<section class="relative flex min-h-[70vh] items-center justify-center bg-bg px-6 py-20 text-center">
+			<div class="absolute inset-0">
+				<img
+					src={`${baseUrl}rubber-tapping.jpg`}
+					alt={t.home.hero.imageAlt}
+					class="h-full w-full object-cover"
+					width="1200"
+					height="800"
+					fetchpriority="high"
+				/>
+				<div class="absolute inset-0 bg-black/50" aria-hidden="true" />
+			</div>
+			<div class="hero-text relative z-10 max-w-[640px]">
+				<h1 class="hero-text-item mb-4 text-[clamp(2rem,5vw,3.25rem)] font-bold leading-tight tracking-tight text-white drop-shadow-md">
+					{t.home.hero.title}
+				</h1>
+				<p class="hero-text-item mb-8 text-lg font-medium leading-[1.65] text-white/95 drop-shadow-sm">
+					{t.home.hero.subtitle}
+				</p>
+				<a href="#contact" class="hero-text-item inline-flex items-center justify-center rounded-lg bg-white px-8 py-3.5 text-base font-semibold text-bg no-underline transition-colors hover:bg-white/90">
+					{t.home.hero.cta}
+				</a>
+			</div>
+		</section>
+
+		<style>
+			@media (prefers-reduced-motion: no-preference) {
+				.hero-text-item {
+					opacity: 0;
+					animation: hero-fade-in 0.7s ease-out forwards;
+				}
+				.hero-text-item:nth-child(1) { animation-delay: 0.1s; }
+				.hero-text-item:nth-child(2) { animation-delay: 0.3s; }
+				.hero-text-item:nth-child(3) { animation-delay: 0.5s; }
+				@keyframes hero-fade-in {
+					from { opacity: 0; }
+					to { opacity: 1; }
+				}
+			}
+			@media (prefers-reduced-motion: reduce) {
+				.hero-text-item { opacity: 1; }
+			}
+		</style>
+
+		<ScrollReveal>
+			<Section id="about" title={t.home.about.title}>
+				<p class="m-0 text-[1.0625rem] leading-[1.7] text-text-muted">
+					{t.home.about.body}
+				</p>
+				<div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+					{[
+						{ value: "1984", label: t.home.about.stats.established },
+						{ value: "1,500t", label: t.home.about.stats.capacity },
+						{ value: "ISO", label: t.home.about.stats.certified },
+						{ value: "40+", label: t.home.about.stats.expertise },
+					].map(stat => (
+						<div class="rounded-xl border border-white/[0.06] bg-surface p-4 text-center">
+							<div class="text-2xl font-bold text-accent">{stat.value}</div>
+							<div class="mt-1 text-xs font-medium uppercase tracking-wide text-text-muted">{stat.label}</div>
+						</div>
+					))}
+				</div>
+				<div class="mt-8">
+					<a href={localizePath(lang, "about/")} class="inline-flex items-center gap-2 text-[0.9375rem] font-semibold text-accent no-underline hover:underline">
+						{t.home.about.cta}
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+					</a>
+				</div>
+			</Section>
+		</ScrollReveal>
+
+		<Section id="products" title={t.home.products.title} alt wide>
+			<div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" role="list">
+				<ScrollReveal delay={0}>
+					<ProductCard
+						title={t.home.products.cards.silicone.title}
+						href={`${localizePath(lang, "products/")}#silicone`}
+						imageSrc={`${baseUrl}silicone.jpg`}
+						imageAlt={t.home.products.cards.silicone.alt}
+					/>
+				</ScrollReveal>
+				<ScrollReveal delay={80}>
+					<ProductCard
+						title={t.home.products.cards.talcum.title}
+						href={`${localizePath(lang, "products/")}#talcum`}
+						imageSrc={`${baseUrl}talcum.jpg`}
+						imageAlt={t.home.products.cards.talcum.alt}
+					/>
+				</ScrollReveal>
+				<ScrollReveal delay={160}>
+					<ProductCard
+						title={t.home.products.cards.foodgrade.title}
+						href={`${localizePath(lang, "products/")}#foodgrade`}
+						imageSrc={`${baseUrl}talcum.jpg`}
+						imageAlt={t.home.products.cards.foodgrade.alt}
+					/>
+				</ScrollReveal>
+				<ScrollReveal delay={240}>
+					<ProductCard
+						title={t.home.products.cards.specialized.title}
+						href={`${localizePath(lang, "products/")}#specialized`}
+						imageSrc={`${baseUrl}color.jpg`}
+						imageAlt={t.home.products.cards.specialized.alt}
+					/>
+				</ScrollReveal>
+			</div>
+			<div class="mt-10 flex justify-center">
+				<ScrollReveal delay={120}>
+					<Button href={localizePath(lang, "products/")} variant="secondary" size="large">{t.home.products.cta}</Button>
+				</ScrollReveal>
+			</div>
+		</Section>
+
+		<ScrollReveal>
+			<section id="papp" class="scroll-mt-20 px-6 py-16">
+				<div class="mx-auto max-w-[900px]">
+					<ProductApplications lang={lang} />
+				</div>
+			</section>
+		</ScrollReveal>
+
+		<ScrollReveal>
+			<Section id="certifications" title={t.home.certifications.title} center>
+				<p class="mx-0 mb-6 mt-2 text-[1.0625rem] leading-[1.7] text-muted">
+					{t.home.certifications.body}
+				</p>
+			</Section>
+		</ScrollReveal>
+
+		<ScrollReveal>
+			<Section id="contact" title={t.home.contact.title} center>
+				<p class="mx-0 mb-6 mt-0 text-[1.0625rem] leading-[1.7] text-muted">
+					{t.home.contact.body}
+				</p>
+				<Button href="#contact" size="large">{t.home.contact.cta}</Button>
+			</Section>
+		</ScrollReveal>
+	</main>
+
+	<Footer lang={lang} />
+
+	<ScrollToTop lang={lang} />
+</Layout>

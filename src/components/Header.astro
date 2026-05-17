@@ -1,36 +1,31 @@
 ---
-/** Nav link: href (anchor or URL) and label */
-export interface NavLink {
-	href: string;
-	label: string;
-}
+import type { Locale } from "../i18n/locales";
+import { useTranslations, localizePath } from "../i18n/utils";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 interface Props {
-	/** Path to logo image (e.g. /ltxlogo-nobg3.png); if not set, shows siteName as text */
-	logoSrc?: string;
-	/** Site name (used as logo alt and fallback if no logo) */
-	siteName?: string;
-	/** Links shown in the nav bar — matches original longtex.co.th structure */
-	navLinks?: NavLink[];
+	lang: Locale;
 }
 
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+const logoSrc = `${baseUrl}ltxlogo-nobg3.png`;
 
-const { logoSrc = `${baseUrl}ltxlogo-nobg3.png`, siteName = "Longtex Rubber Industry", navLinks = [
-	{ href: baseUrl, label: "HOME" },
-	{ href: `${baseUrl}about/`, label: "ABOUT" },
-	{ href: `${baseUrl}products/`, label: "PRODUCTS" },
-	{ href: `${baseUrl}products/#papp`, label: "APPLICATIONS" },
-	{ href: `${baseUrl}reference/`, label: "REFERENCE" },
-	{ href: `${baseUrl}#contact`, label: "CONTACT" },
-] } = Astro.props;
+const navLinks = [
+	{ href: localizePath(lang, ""), label: t.nav.home },
+	{ href: localizePath(lang, "about/"), label: t.nav.about },
+	{ href: localizePath(lang, "products/"), label: t.nav.products },
+	{ href: `${localizePath(lang, "products/")}#papp`, label: t.nav.applications },
+	{ href: localizePath(lang, "reference/"), label: t.nav.reference },
+	{ href: `${localizePath(lang, "")}#contact`, label: t.nav.contact },
+];
 ---
 
-<!-- Sticky top bar: logo + nav links (matches original longtex.co.th) -->
 <header class="sticky top-0 z-100 border-b border-white/10 bg-bg/95 py-3 backdrop-blur-md">
 	<nav class="mx-auto flex max-w-[1100px] items-center justify-between px-4 sm:px-6">
-		<a href={baseUrl} class="flex items-center gap-2 text-text no-underline hover:opacity-90">
-			<img src={logoSrc} alt={siteName} class="h-12 w-auto" width="160" height="55" />
+		<a href={localizePath(lang, "")} class="flex items-center gap-2 text-text no-underline hover:opacity-90">
+			<img src={logoSrc} alt={t.common.siteShortName} class="h-12 w-auto" width="160" height="55" />
 		</a>
 		<div class="flex flex-wrap items-center justify-end gap-4 sm:gap-6">
 			{navLinks.map((link) => (
@@ -38,6 +33,7 @@ const { logoSrc = `${baseUrl}ltxlogo-nobg3.png`, siteName = "Longtex Rubber Indu
 					{link.label}
 				</a>
 			))}
+			<LanguageSwitcher lang={lang} />
 		</div>
 	</nav>
 </header>

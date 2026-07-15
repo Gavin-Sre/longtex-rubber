@@ -6,6 +6,9 @@ import sitemap from "@astrojs/sitemap";
 // Base path: use BASE_PATH when set (e.g. in GitHub Actions for Pages), otherwise "/" for local dev
 const base = process.env.BASE_PATH || "/";
 
+// Astro applies `base` to redirect sources but not destinations, so prefix them manually.
+const basePrefix = base.replace(/\/$/, "");
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://gavin-sre.github.io/longtex-rubber",
@@ -23,10 +26,10 @@ export default defineConfig({
 
   // Any URL without a locale prefix falls back to the English version.
   redirects: {
-    "/": "/en/",
-    "/about/": "/en/about/",
-    "/products/": "/en/products/",
-    "/reference/": "/en/reference/",
+    "/": `${basePrefix}/en/`,
+    "/about/": `${basePrefix}/en/about/`,
+    "/products/": `${basePrefix}/en/products/`,
+    "/reference/": `${basePrefix}/en/reference/`,
   },
 
   integrations: [

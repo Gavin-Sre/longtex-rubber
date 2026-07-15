@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
@@ -41,7 +41,8 @@ export default defineConfig({
           zh: "zh-CN",
         },
       },
-      filter: (page) => !/\/longtex-rubber\/?$|gavin-sre\.github\.io\/?$/.test(page),
+      filter: (page) =>
+        !/\/longtex-rubber\/?$|gavin-sre\.github\.io\/?$/.test(page),
       serialize(item) {
         if (/\/(en|th|zh)\/?$/.test(item.url)) item.priority = 1.0;
         if (item.url.includes("/products")) item.priority = 0.9;

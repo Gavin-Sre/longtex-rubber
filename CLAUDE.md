@@ -23,6 +23,7 @@ Corporate B2B marketing website for **Longtex Rubber Industry Co., Ltd.**, a Tha
 - **Framework:** Astro 5 (static site generator — no React, no server-side rendering)
 - **Styling:** Tailwind CSS v4 via `@tailwindcss/vite` plugin (NOT the traditional `tailwind.config.js`)
 - **Carousel:** Embla Carousel 8 (used in `ProductSection.astro`)
+- **i18n:** Astro built-in i18n routing (`en`/`th`/`zh`) + custom translation dictionaries in `src/i18n/`
 - **Package manager:** pnpm
 - **Deployment:** GitHub Pages via GitHub Actions
 
@@ -39,7 +40,7 @@ pnpm check      # TypeScript / Astro type-check
 
 ### Layout & Base URL
 
-`Layout.astro` is the single shared shell — every page passes `title`, `description`, `ogImage` as props. It owns all `<head>` content: meta tags, Open Graph, Twitter card, JSON-LD (Organization schema), Google Fonts preload, and Google Analytics.
+`Layout.astro` is the single shared shell — pages pass `title`, `description`, `keywords`, and `lang` (plus optional `ogImage`) as props (`lang` defaults to the URL-derived locale; `ogImage` defaults to `rubber-tapping.jpg`). It owns all `<head>` content: meta tags, `hreflang` alternates + `x-default`, `og:locale` / `og:locale:alternate`, Open Graph, Twitter card, JSON-LD (Organization schema), Google Fonts preload, and Google Analytics. It also sets `<html lang>` from `hreflangMap[lang]`. Pages can inject extra head content (e.g. per-page JSON-LD) via `<slot name="head" />`.
 
 Base URL is dynamic: `import.meta.env.BASE_URL` at runtime, controlled by `BASE_PATH` env var in CI (GitHub Actions sets it to `/longtex-rubber/`). Every internal link and asset reference must use:
 
@@ -48,17 +49,39 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 // then: `${baseUrl}image.jpg`  or  href={`${baseUrl}products/`}
 ```
 
+### Internationalization (i18n)
+
+The site ships in three locales: `en` (default), `th`, `zh`. Astro's built-in i18n is configured in `astro.config.mjs` with `prefixDefaultLocale: true` and `redirectToDefaultLocale: true`, so **every** URL is locale-prefixed (`/en/`, `/th/`, `/zh/`). Root/unprefixed paths (`/`, `/about/`, etc.) redirect to their `/en/` equivalents.
+
+All i18n logic lives in `src/i18n/`:
+- **`locales.ts`** — the `locales` tuple, `defaultLocale`, `localeNames`/`localeShortNames`, `hreflangMap` (`zh` → `zh-CN`), `ogLocaleMap`, and the `isLocale()` guard.
+- **`utils.ts`** — `useTranslations(lang)` returns the dictionary (use as `t.section.key`); `getLangFromUrl(url)` reads the active locale; `localizePath(lang, "products/")` builds an internal link for a known path; `getLocalizedPath(lang, currentUrl)` maps the current page to the same page in another locale (used by the language switcher). All of these already account for `baseUrl`.
+- **`ui/en.ts`, `ui/th.ts`, `ui/zh.ts`** — the translation dictionaries. `en.ts` exports the `UIDict` type; the other two must stay structurally identical. Per-page SEO strings (`title`, `description`, `keywords`) live under each page's `seo` key in these dictionaries — **not** hardcoded in pages.
+
+**When adding or changing user-facing text or SEO metadata, update all three dictionaries.** Never hardcode copy in a page/component; pull it from `t`.
+
 ### Pages & Routing
 
-- `index.astro` — Homepage with hero, About snippet, product card grid, applications infographic, certifications, contact CTA
-- `products.astro` — Full product catalog; each product rendered via `ProductSection.astro` with spec table + Embla carousel
-- `reference.astro` — Technical specification tables via `ReferenceSpecTable.astro`
-- `about.astro` — Company history and team
+All pages live under `src/pages/[lang]/` and export `getStaticPaths()` returning the three locales, so each page is statically generated once per locale. `Astro.params.lang` is the active locale.
+
+- `[lang]/index.astro` — Homepage with hero, About snippet, product card grid, applications infographic, certifications, contact CTA
+- `[lang]/products.astro` — Full product catalog; each product rendered via `ProductSection.astro` with spec table + Embla carousel
+- `[lang]/reference.astro` — Technical specification tables via `ReferenceSpecTable.astro`
+- `[lang]/about.astro` — Company history and team
 
 ### Key Components
 
+Locale-aware components take a `lang: Locale` prop and resolve copy via `useTranslations(lang)`.
+
+- **`Header.astro`** — Sticky top nav; takes `lang`, builds locale-prefixed nav links with `localizePath`, renders the logo and `LanguageSwitcher`.
+- **`Footer.astro`** — Site footer; takes `lang`, pulls address/copyright from the dictionary.
+- **`LanguageSwitcher.astro`** — `<details>`-based locale dropdown; uses `getLocalizedPath` to link to the current page in each locale and sets `hreflang` on each link.
+- **`ProductCard.astro`** — Homepage product highlight card; props `title`, `imageSrc`, `imageAlt`, `href`.
 - **`ProductSection.astro`** — Takes `id`, `title`, `images[]`, `tableHeaderRow1`, `tableHeaderRow2`, `tableRows` props. Renders a merged-header `<table>` then an Embla carousel below it. Set `placeholder=true` for a coming-soon state with no table/carousel.
+- **`ProductApplications.astro`** — Applications infographic on the homepage; takes `lang`.
+- **`Button.astro`** — Shared link/button; props include `href`, `variant`, `size`.
 - **`ScrollReveal.astro`** — Wraps any content in a `<div class="scroll-reveal">` driven by an IntersectionObserver. Accepts a `delay` prop (ms). Respects `prefers-reduced-motion`.
+- **`ScrollToTop.astro`** — Floating back-to-top control; takes `lang` for its label.
 - **`Section.astro`** — Layout wrapper for page sections; accepts `id`, `title`, `alt` (dark background variant), `wide`, `center` props.
 - **`ReferenceSpecTable.astro`** — Static technical reference table for the reference page.
 
@@ -79,8 +102,9 @@ Use these token names as Tailwind classes (`bg-bg`, `text-text-muted`, `text-acc
 
 ### Sitemap
 
-`astro.config.mjs` configures `@astrojs/sitemap` with custom priorities:
-- Homepage: 1.0, `/products/`: 0.9, `/reference/`: 0.8, others: 0.7
+`astro.config.mjs` configures `@astrojs/sitemap` with i18n awareness (locale map `en`/`th`/`zh-CN`) and custom priorities via `serialize`:
+- Locale homepages (`/en/`, `/th/`, `/zh/`): 1.0, `/products`: 0.9, `/reference`: 0.8, others: 0.7
+- A `filter` drops the non-localized root URL so only locale-prefixed pages are indexed.
 
 ## SEO Rules — Always Apply
 
@@ -88,12 +112,13 @@ These are non-negotiable. Apply them to every file you touch or create.
 
 ### Meta Tags & Head
 
-- Every page must pass `title`, `description`, and `ogImage` to `Layout.astro`
+- Every page must pass `title`, `description` (and ideally `keywords`) to `Layout.astro`; these live in each locale's `seo` dictionary key, not inline
 - Title format: `[Page Topic] | Longtex — [Differentiator]`, 50–60 characters
 - Description: 150–160 characters, keyword-rich, describes the specific page content
 - `og:image` must always be set — default to `rubber-tapping.jpg` (1200×630px) relative to `siteOrigin`
 - `og:site_name` must be `"Longtex Rubber Industry Co., Ltd."`
 - Canonical URL is derived from `Astro.url` — never hardcode it
+- **Localized SEO is automatic in `Layout.astro`:** `hreflang` alternates for all locales + `x-default`, and `og:locale` / `og:locale:alternate`. Keep these intact and ensure every page renders in all three locales so the alternates resolve.
 
 ### Structured Data (JSON-LD)
 
@@ -102,6 +127,7 @@ These are non-negotiable. Apply them to every file you touch or create.
 - **BreadcrumbList schema** must appear on all non-homepage pages — not yet implemented
 - **WebSite schema** must appear on the homepage only — not yet implemented
 - Use `set:html={JSON.stringify({...})}` pattern for Astro JSON-LD injection
+- Inject per-page JSON-LD through the `<slot name="head">` slot in `Layout.astro`
 - Validate new schemas with Google Rich Results Test
 
 ### Sitemap & Crawlability
@@ -121,8 +147,10 @@ These are non-negotiable. Apply them to every file you touch or create.
 
 ### URLs & Routing
 
-- All internal links must include `baseUrl` prefix (see Architecture section above)
-- No duplicate content — canonical URLs must resolve to exactly one URL per page
+- All internal links must be locale-aware: use `localizePath(lang, "products/")` for known paths or `getLocalizedPath(lang, Astro.url)` for the current page in another locale. These helpers already include the `baseUrl` prefix — do not hand-concatenate locale segments.
+- Raw asset references (images, etc.) still use the `baseUrl` prefix directly.
+- `trailingSlash: 'always'` — every link must end with `/`.
+- No duplicate content — canonical URLs must resolve to exactly one URL per page, and each locale variant is deduped via `hreflang`.
 
 ### Performance (Core Web Vitals)
 
@@ -132,6 +160,8 @@ These are non-negotiable. Apply them to every file you touch or create.
 - Google Analytics `<script async>` is acceptable — `async` prevents render-blocking
 
 ### Content & Keywords
+
+All copy lives in the `src/i18n/ui/*.ts` dictionaries. When adding or editing content or keywords, update `en.ts`, `th.ts`, and `zh.ts` together and keep the target keywords below reflected in the English source (translations should preserve intent, not keyword-stuff).
 
 **Tier 1 — Core (high volume):**
 - "rubber thread manufacturer Thailand"

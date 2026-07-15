@@ -41,7 +41,7 @@ const en = {
 			cta: "Learn more about us",
 		},
 		products: {
-			title: "Products",
+			title: "Our Products",
 			cta: "Explore our products",
 			cards: {
 				silicone: { title: "Silicone", alt: "Silicone rubber thread" },

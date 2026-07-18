@@ -1,212 +1,240 @@
-// TODO: Replace English placeholders with Thai translations.
 // Structure must match en.ts exactly — TypeScript will flag any missing/extra keys.
 import type { UIDict } from "./en";
 
 const th: UIDict = {
-	common: {
-		siteName: "Longtex Rubber Industry Co., Ltd.",
-		siteShortName: "Longtex Rubber Industry",
-		address: "121/32 Moo 8 Soi Suksawad 74, Suksawad Rd., Bangkru, Prapradaeng, Samutprakarn 10130 Thailand.",
-		copyright: "© {year} Longtex Rubber Industry Co., Ltd.",
-		backToTop: "Back to top",
-	},
-	nav: {
-		home: "HOME",
-		about: "ABOUT",
-		products: "PRODUCTS",
-		applications: "APPLICATIONS",
-		reference: "REFERENCE",
-		contact: "CONTACT",
-	},
-	langSwitcher: {
-		label: "Language",
-	},
-	home: {
-		seo: {
-			title: "Natural Rubber Thread Manufacturer Thailand | Longtex - ISO Certified",
-			description: "Leading Thailand natural rubber thread manufacturer. ISO certified silicone, talcum, food-grade extruded rubber threads for textile, medical & industrial applications. Export worldwide.",
-			keywords: "rubber thread manufacturer Thailand, natural latex thread, silicone rubber thread, talcum coated thread, food grade rubber thread, elastic thread Thailand",
-		},
-		hero: {
-			title: "Longtex Rubber Industry",
-			subtitle: "Looking for high quality extruded rubber threads? We're here to help!",
-			cta: "Contact Us",
-			imageAlt: "Rubber tapping",
-		},
-		about: {
-			title: "Who We Are",
-			body: "Founded in 1984, Longtex Rubber Industry Co., Ltd. is a Thailand-based manufacturer and global exporter of high-quality extruded natural rubber threads. With a production capacity of 1,500 tons per month, we supply silicone-coated, talcum-coated, food-grade, and specialized rubber threads to textile, medical, sports, and industrial customers worldwide. Our products are certified to ISO and OekoTex international standards, backed by 40+ years of manufacturing expertise and a commitment to sustainable, renewable-energy-powered production.",
-			stats: {
-				established: "Established",
-				capacity: "Monthly Capacity",
-				certified: "OekoTex Certified",
-				expertise: "Years of Expertise",
-			},
-			cta: "Learn more about us",
-		},
-		products: {
-			title: "Products",
-			cta: "Explore our products",
-			cards: {
-				silicone: { title: "Silicone", alt: "Silicone rubber thread" },
-				talcum: { title: "Talcum", alt: "Talcum coated rubber thread" },
-				foodgrade: { title: "Food Grade", alt: "Food grade rubber thread" },
-				specialized: { title: "Specialized Threads", alt: "Specialized rubber threads" },
-			},
-		},
-		certifications: {
-			title: "Certifications",
-			body: "ISO certified. Quality and consistency you can rely on for your supply chain.",
-		},
-		contact: {
-			title: "Let's work together",
-			body: "Ready to get started? Reach out and we'll get back to you as soon as we can.",
-			cta: "Contact us",
-		},
-	},
-	products: {
-		seo: {
-			title: "Our Products | Natural Rubber Thread | Longtex",
-			description: "Leading Thailand natural rubber thread manufacturer. Talcum coated, silicone coated, and food grade extruded rubber threads. Count 20–110, ISO certified.",
-			keywords: "talcum coated rubber thread, silicone rubber thread, food grade rubber thread, natural latex thread Thailand",
-		},
-		pageTitle: "Our Products",
-		sections: {
-			talcum: "Talcum Coated",
-			silicone: "Silicone Coated",
-			foodgrade: "Food Grade Rubber",
-			specialized: "Specialized Threads",
-		},
-		placeholderText: "Specifications and imagery for specialized threads (UV resistance, fire retardancy, custom colors, and more) will be published here soon.",
-		table: {
-			count: "Count",
-			packaging: "Packaging (kg./box)",
-			color: "Color",
-			elongation: "Elongation At Break",
-			black: "Black",
-			white: "White",
-		},
-		applicationsTitle: "Product Applications",
-		storage: {
-			title: "How to Properly Store Extruded Rubber Threads",
-			intro: "To maintain the longevity and optimal performance of our extruded rubber threads, it is crucial to adopt proper storage practices.",
-			tips: [
-				"Store extruded rubber threads in a stable environment with consistent temperature and humidity, recommended between 15 to 25 degrees Celsius.",
-				"Shield threads from direct sunlight to prevent adverse effects on their properties.",
-				"Limit stacking to no more than four layers to avoid deformation and maintain the original form.",
-				"Follow a 'first in, first out' approach for inventory management to ensure freshness.",
-				"Refrain from mixing batches during storage to preserve consistent quality.",
-				"Utilize the product within four months for optimal quality.",
-				"Keep storage boxes upright to prevent any mishandling or damage.",
-			],
-		},
-	},
-	reference: {
-		seo: {
-			title: "Technical Reference | Longtex Rubber Thread",
-			description: "Size, diameter, area, and yield reference for Longtex natural rubber threads (density basis as published).",
-			keywords: "rubber thread size chart, thread yield m/kg, rubber thread diameter reference, Longtex specifications",
-		},
-		pageTitle: "Reference",
-		section: {
-			title: "Thread sizing & yield",
-			intro: "Legacy technical table for extruded rubber thread: count (size), diameters, cross-sectional area, and yield. Values are as published for planning and conversion; confirm critical dimensions with your Longtex representative.",
-			tableTitle: "Size, Diameter, and Yield of Longtex's Threads",
-			density: "Density = 1.02(g/mm²)",
-			conversionTitle: "Conversion Table",
-		},
-		headers: {
-			size: "SIZE",
-			diaMm: "DIA. (mm)",
-			diaIn: "DIA. (in)",
-			area: "AREA (mm²)",
-			yieldMkg: "YIELD (m/kg)",
-			yieldYdLb: "YIELD (yd/lb)",
-		},
-	},
-	about: {
-		seo: {
-			title: "About Longtex Rubber Industry | Established 1984 | Thailand Rubber Thread Manufacturer",
-			description: "Founded in 1984, Longtex Rubber Industry produces 1,500 tons/month of ISO and OekoTex certified extruded natural rubber threads. Learn about our mission, capacity, R&D, and sustainability.",
-			keywords: "about Longtex, rubber thread manufacturer Thailand, established 1984, 1500 tons rubber thread, OekoTex certified rubber thread, ISO rubber thread manufacturer, sustainable rubber manufacturer Thailand",
-		},
-		hero: {
-			eyebrow: "Est. 1984 · Thailand",
-			titleLine1: "Four decades of extruded",
-			titleLine2: "natural rubber thread",
-			body: "Longtex Rubber Industry is a Thailand-based manufacturer of ISO and OekoTex certified extruded natural rubber threads — supplying textile, medical, sports, and industrial customers worldwide for over 40 years.",
-		},
-		stats: {
-			yearFounded: "Year Founded",
-			capacity: "Monthly Capacity",
-			expertise: "Years of Expertise",
-			certified: "OekoTex Certified",
-		},
-		breadcrumbHome: "Home",
-		breadcrumbAbout: "About Us",
-		sections: {
-			mission: {
-				eyebrow: "Heritage",
-				title: "Mission & Values",
-				body: "Established in 1984, Longtex Rubber Industry has been a trusted manufacturer and exporter of high-quality extruded natural rubber threads from Thailand to customers around the world. Guided by our commitment to quality, reliability, and continuous improvement, we strive to deliver products that meet customer requirements with consistency and precision.\n\nThrough advanced manufacturing technology, sustainable operations, and a culture of ongoing development, we ensure every meter of thread reflects our promises of high quality, on-time delivery, and value you can rely on.",
-				quote: "\"Maintain High Quality Standards, Ensure Timely Delivery, Offer Fair Pricing, Meet Customer Needs, and Strive for Continuous Improvement.\"",
-				quoteLabel: "Quality Policy",
-				imageAlt: "The Longtex Rubber Industry team at our Thailand natural rubber thread manufacturing facility, established 1984.",
-			},
-			capacity: {
-				eyebrow: "Scale",
-				title: "Production Capacity",
-				body: "Longtex takes pride in its rich history and expertise in manufacturing extruded rubber threads. Since our establishment in 1984, we have grown exponentially, evolving from a production capacity of 200 tons per month to an impressive 1,500 tons per month. This remarkable expansion is a testament to our dedication to continuous improvement and meeting the growing demands of the global market.",
-				imageAlt: "Natural latex storage tanks at the Longtex extruded rubber thread production facility in Thailand, supporting 1,500 tons per month capacity.",
-			},
-			rd: {
-				eyebrow: "Innovation",
-				title: "Research & Development",
-				body: "At Longtex Rubber Industry, our manufacturing capabilities are driven by our excellent teams, who possess deep technical knowledge and expertise. Our experienced professionals are equipped with a profound understanding of rubber thread manufacturing techniques, enabling us to produce superior products that consistently meet or exceed customer expectations. We foster a culture of flexibility and innovation, allowing us to adapt to evolving market trends and offer customized solutions to our valued clients.",
-				imageAlt: "Longtex laboratory technicians conducting quality research and development on extruded natural rubber thread samples in Thailand.",
-			},
-			standards: {
-				eyebrow: "Trust",
-				title: "International Standards",
-				body: "We attribute our success to a relentless pursuit of quality in every aspect of our operations. Our commitment to enhancing product quality has resulted in the establishment of a robust quality management system. We are proud to hold the prestigious OekoTex certificate, which ensures that our rubber threads meet stringent international standards for safety and sustainability. Furthermore, we conduct various tests upon customer demands to provide tailored solutions that meet specific requirements.",
-				imageAlt: "Longtex production floor showcasing ISO and OekoTex certified rubber thread manufacturing safety and quality standards.",
-			},
-			green: {
-				eyebrow: "Sustainability",
-				title: "Go Green",
-				body: "At Longtex, we strive to minimize our environmental footprint and maximize positive impact. We are integrating the use of renewable energy — solar power and biogas generators — into our production process to become more energy efficient. By harnessing power from the sun along with converting production waste into electricity, we are able to reduce our carbon footprint and contribute to a cleaner and greener planet.",
-				imageAlt: "Rooftop solar panels powering sustainable rubber thread manufacturing at the Longtex facility in Thailand.",
-			},
-		},
-		cta: {
-			title: "Ready to work with us?",
-			body: "Explore our full range of ISO certified rubber thread products or get in touch with our team.",
-			primary: "Explore Products",
-			secondary: "Contact Us",
-		},
-	},
-	applications: {
-		sports: {
-			title: "Sports Industry",
-			description: "Waist straps, compression tights, bungee cords, and performance sportswear that demands consistent elasticity under repeated stress.",
-		},
-		food: {
-			title: "Food Industry",
-			description: "Food-grade rubber for meat netting, chicken loops, and packaging where safety and hygiene compliance are non-negotiable.",
-		},
-		socks: {
-			title: "Socks Top",
-			description: "Fine counts of rubber thread engineered for sock cuffs with lasting hold.",
-		},
-		packaging: {
-			title: "Packaging",
-			description: "Braids and cords built for multi-purpose industrial and retail packaging applications.",
-		},
-		medical: {
-			title: "Medical Products",
-			description: "Surgical masks, orthopedic knits, compression stockings, and medical-grade elastic goods.",
-		},
-	},
+  common: {
+    siteName: "บริษัท ลองเท็กซ์รับเบอร์อินดัสตรี จำกัด",
+    siteShortName: "ลองเท็กซ์รับเบอร์อินดัสตรี",
+    address:
+      "121/32 หมู่ 8 ซอยสุขสวัสดิ์ 74 ถนนสุขสวัสดิ์ ตำบลบางครุ อำเภอพระประแดง จังหวัดสมุทรปราการ 10130 ประเทศไทย",
+    copyright: "© {year} บริษัท ลองเท็กซ์รับเบอร์อินดัสตรี จำกัด",
+    backToTop: "กลับขึ้นด้านบน",
+  },
+  nav: {
+    home: "หน้าแรก",
+    about: "เกี่ยวกับเรา",
+    products: "ผลิตภัณฑ์",
+    applications: "การใช้งาน",
+    reference: "ข้อมูลอ้างอิง",
+    contact: "ติดต่อ",
+  },
+  langSwitcher: {
+    label: "ภาษา",
+  },
+  home: {
+    seo: {
+      title:
+        "ผู้ผลิตด้ายยางธรรมชาติในประเทศไทย | Longtex - ได้รับการรับรอง ISO",
+      description:
+        "ผู้ผลิตด้ายยางธรรมชาติชั้นนำของประเทศไทย ด้ายยางแบบเอ็กซ์ทรูดเคลือบซิลิโคน ทัลคัม และเกรดอาหาร ที่ได้รับการรับรอง ISO สำหรับอุตสาหกรรมสิ่งทอ การแพทย์ และอุตสาหกรรมทั่วไป ส่งออกทั่วโลก",
+      keywords:
+        "ผู้ผลิตด้ายยางประเทศไทย, ด้ายยางธรรมชาติ, ด้ายยางซิลิโคน, ด้ายยางเคลือบทัลคัม, ด้ายยางเกรดอาหาร, ด้ายยางยืดประเทศไทย",
+    },
+    hero: {
+      title: "ลองเท็กซ์รับเบอร์อินดัสตรี",
+      subtitle:
+        "กำลังมองหาด้ายยางยืดคุณภาพสูงอยู่ใช่ไหม? เราพร้อมให้ความช่วยเหลือ!",
+      cta: "ติดต่อเรา",
+      imageAlt: "การกรีดยาง",
+    },
+    about: {
+      title: "เราคือใคร",
+      body: "ก่อตั้งขึ้นในปี 1984 บริษัท ลองเท็กซ์รับเบอร์อินดัสตรี จำกัด เป็นผู้ผลิตในประเทศไทยและผู้ส่งออกด้ายยางธรรมชาติแบบเอ็กซ์ทรูดคุณภาพสูงไปทั่วโลก ด้วยกำลังการผลิต 1,500 ตันต่อเดือน เราจัดหาด้ายยางเคลือบซิลิโคน เคลือบทัลคัม เกรดอาหาร และด้ายยางเฉพาะทางให้แก่ลูกค้าในอุตสาหกรรมสิ่งทอ การแพทย์ กีฬา และอุตสาหกรรมทั่วโลก ผลิตภัณฑ์ของเราได้รับการรับรองตามมาตรฐานสากล ISO และ OekoTex ด้วยความเชี่ยวชาญด้านการผลิตกว่า 40 ปี และความมุ่งมั่นในการผลิตอย่างยั่งยืนด้วยพลังงานหมุนเวียน",
+      stats: {
+        established: "ก่อตั้ง",
+        capacity: "กำลังการผลิตต่อเดือน",
+        certified: "รับรองโดย OekoTex",
+        expertise: "ปีแห่งความเชี่ยวชาญ",
+      },
+      cta: "เรียนรู้เพิ่มเติมเกี่ยวกับเรา",
+    },
+    products: {
+      title: "ผลิตภัณฑ์ของเรา",
+      cta: "สำรวจผลิตภัณฑ์ของเรา",
+      cards: {
+        silicone: { title: "ซิลิโคน", alt: "ด้ายยางซิลิโคน" },
+        talcum: { title: "ทัลคัม", alt: "ด้ายยางเคลือบทัลคัม" },
+        foodgrade: { title: "เกรดอาหาร", alt: "ด้ายยางเกรดอาหาร" },
+        specialized: {
+          title: "ด้ายยางเฉพาะทาง",
+          alt: "ด้ายยางเฉพาะทาง",
+        },
+      },
+    },
+    certifications: {
+      title: "การรับรอง",
+      body: "ได้รับการรับรอง ISO คุณภาพและความสม่ำเสมอที่คุณวางใจได้สำหรับห่วงโซ่อุปทานของคุณ",
+    },
+    contact: {
+      title: "มาร่วมงานกับเรา",
+      body: "พร้อมเริ่มต้นแล้วหรือยัง? ติดต่อเราแล้วเราจะติดต่อกลับโดยเร็วที่สุด",
+      cta: "ติดต่อเรา",
+    },
+  },
+  products: {
+    seo: {
+      title: "ผลิตภัณฑ์ของเรา | ด้ายยางธรรมชาติ | Longtex",
+      description:
+        "ผู้ผลิตด้ายยางธรรมชาติชั้นนำของประเทศไทย ด้ายยางแบบเอ็กซ์ทรูดเคลือบทัลคัม เคลือบซิลิโคน และเกรดอาหาร ขนาด 20–110 ได้รับการรับรอง ISO",
+      keywords:
+        "ด้ายยางเคลือบทัลคัม, ด้ายยางซิลิโคน, ด้ายยางเกรดอาหาร, ด้ายยางธรรมชาติประเทศไทย",
+    },
+    pageTitle: "ผลิตภัณฑ์ของเรา",
+    sections: {
+      talcum: "เคลือบทัลคัม",
+      silicone: "เคลือบซิลิโคน",
+      foodgrade: "ยางเกรดอาหาร",
+      specialized: "ด้ายยางเฉพาะทาง",
+    },
+    placeholderText:
+      "ข้อมูลจำเพาะและรูปภาพสำหรับด้ายยางเฉพาะทาง (ความต้านทานรังสียูวี สารหน่วงไฟ สีที่กำหนดเอง และอื่นๆ) จะเผยแพร่ที่นี่เร็วๆ นี้",
+    table: {
+      count: "ขนาด (Count)",
+      packaging: "บรรจุภัณฑ์ (กก./กล่อง)",
+      color: "สี",
+      elongation: "การยืดตัว ณ จุดขาด",
+      black: "สีดำ",
+      white: "สีขาว",
+    },
+    applicationsTitle: "การใช้งานผลิตภัณฑ์",
+    storage: {
+      title: "วิธีจัดเก็บด้ายยางแบบเอ็กซ์ทรูดอย่างถูกต้อง",
+      intro:
+        "เพื่อรักษาอายุการใช้งานและประสิทธิภาพสูงสุดของด้ายยางแบบเอ็กซ์ทรูดของเรา จำเป็นอย่างยิ่งที่จะต้องใช้วิธีการจัดเก็บที่เหมาะสม",
+      tips: [
+        "จัดเก็บด้ายยางแบบเอ็กซ์ทรูดในสภาพแวดล้อมที่คงที่ มีอุณหภูมิและความชื้นสม่ำเสมอ แนะนำระหว่าง 15 ถึง 25 องศาเซลเซียส",
+        "ป้องกันด้ายยางจากแสงแดดโดยตรงเพื่อไม่ให้ส่งผลเสียต่อคุณสมบัติของด้าย",
+        "จำกัดการวางซ้อนไม่เกินสี่ชั้นเพื่อหลีกเลี่ยงการเสียรูปและคงรูปทรงเดิมไว้",
+        "ใช้หลักการ 'เข้าก่อนออกก่อน' ในการจัดการสินค้าคงคลังเพื่อความสดใหม่",
+        "หลีกเลี่ยงการปะปนล็อตการผลิตระหว่างการจัดเก็บเพื่อรักษาคุณภาพให้สม่ำเสมอ",
+        "ใช้ผลิตภัณฑ์ภายในสี่เดือนเพื่อคุณภาพที่ดีที่สุด",
+        "วางกล่องจัดเก็บในแนวตั้งเพื่อป้องกันการจัดการที่ผิดพลาดหรือความเสียหาย",
+      ],
+    },
+  },
+  reference: {
+    seo: {
+      title: "ข้อมูลอ้างอิงทางเทคนิค | ด้ายยาง Longtex",
+      description:
+        "ข้อมูลอ้างอิงขนาด เส้นผ่านศูนย์กลาง พื้นที่ และผลผลิตของด้ายยางธรรมชาติ Longtex (ตามค่าความหนาแน่นที่เผยแพร่)",
+      keywords:
+        "ตารางขนาดด้ายยาง, ผลผลิตด้าย ม./กก., ข้อมูลอ้างอิงเส้นผ่านศูนย์กลางด้ายยาง, ข้อมูลจำเพาะ Longtex",
+    },
+    pageTitle: "ข้อมูลอ้างอิง",
+    section: {
+      title: "ขนาดและผลผลิตของด้าย",
+      intro:
+        "ตารางเทคนิคดั้งเดิมสำหรับด้ายยางแบบเอ็กซ์ทรูด: ขนาด (count) เส้นผ่านศูนย์กลาง พื้นที่หน้าตัด และผลผลิต ค่าต่างๆ เป็นค่าที่เผยแพร่เพื่อการวางแผนและการแปลงหน่วย โปรดยืนยันขนาดที่สำคัญกับตัวแทนของ Longtex",
+      tableTitle: "ขนาด เส้นผ่านศูนย์กลาง และผลผลิตของด้าย Longtex",
+      density: "ความหนาแน่น = 1.02(g/mm²)",
+      conversionTitle: "ตารางการแปลงหน่วย",
+    },
+    headers: {
+      size: "ขนาด",
+      diaMm: "เส้นผ่านศูนย์กลาง (มม.)",
+      diaIn: "เส้นผ่านศูนย์กลาง (นิ้ว)",
+      area: "พื้นที่ (มม.²)",
+      yieldMkg: "ผลผลิต (ม./กก.)",
+      yieldYdLb: "ผลผลิต (หลา/ปอนด์)",
+    },
+  },
+  about: {
+    seo: {
+      title:
+        "เกี่ยวกับ Longtex Rubber Industry | ก่อตั้งปี 1984 | ผู้ผลิตด้ายยางในประเทศไทย",
+      description:
+        "ก่อตั้งในปี 1984 บริษัท ลองเท็กซ์รับเบอร์อินดัสตรี ผลิตด้ายยางธรรมชาติแบบเอ็กซ์ทรูด 1,500 ตัน/เดือน ได้รับการรับรอง ISO และ OekoTex เรียนรู้เกี่ยวกับพันธกิจ กำลังการผลิต การวิจัย และความยั่งยืนของเรา",
+      keywords:
+        "เกี่ยวกับ Longtex, ผู้ผลิตด้ายยางประเทศไทย, ก่อตั้งปี 1984, ด้ายยาง 1500 ตัน, ด้ายยางรับรอง OekoTex, ผู้ผลิตด้ายยาง ISO, ผู้ผลิตยางยั่งยืนประเทศไทย",
+    },
+    hero: {
+      eyebrow: "ก่อตั้งปี 1984 · ประเทศไทย",
+      titleLine1: "สี่ทศวรรษแห่งด้ายยางธรรมชาติ",
+      titleLine2: "แบบเอ็กซ์ทรูด",
+      body: "ลองเท็กซ์รับเบอร์อินดัสตรี เป็นผู้ผลิตด้ายยางธรรมชาติแบบเอ็กซ์ทรูดในประเทศไทยที่ได้รับการรับรอง ISO และ OekoTex จัดหาสินค้าให้ลูกค้าในอุตสาหกรรมสิ่งทอ การแพทย์ กีฬา และอุตสาหกรรมทั่วโลกมากว่า 40 ปี",
+    },
+    stats: {
+      yearFounded: "ปีที่ก่อตั้ง",
+      capacity: "กำลังการผลิตต่อเดือน",
+      expertise: "ปีแห่งความเชี่ยวชาญ",
+      certified: "รับรองโดย OekoTex",
+    },
+    breadcrumbHome: "หน้าแรก",
+    breadcrumbAbout: "เกี่ยวกับเรา",
+    sections: {
+      mission: {
+        eyebrow: "มรดกองค์กร",
+        title: "พันธกิจและค่านิยม",
+        body: "ก่อตั้งขึ้นในปี 1984 ลองเท็กซ์รับเบอร์อินดัสตรี เป็นผู้ผลิตและผู้ส่งออกด้ายยางธรรมชาติแบบเอ็กซ์ทรูดคุณภาพสูงที่ได้รับความไว้วางใจจากประเทศไทยสู่ลูกค้าทั่วโลก ด้วยความมุ่งมั่นในคุณภาพ ความน่าเชื่อถือ และการพัฒนาอย่างต่อเนื่อง เรามุ่งมั่นส่งมอบผลิตภัณฑ์ที่ตอบสนองความต้องการของลูกค้าอย่างสม่ำเสมอและแม่นยำ\n\nด้วยเทคโนโลยีการผลิตที่ทันสมัย การดำเนินงานที่ยั่งยืน และวัฒนธรรมแห่งการพัฒนาอย่างต่อเนื่อง เรามั่นใจว่าด้ายทุกเมตรสะท้อนถึงคำมั่นสัญญาของเราในเรื่องคุณภาพสูง การส่งมอบตรงเวลา และคุณค่าที่คุณวางใจได้",
+        quote:
+          '"รักษามาตรฐานคุณภาพสูง ส่งมอบตรงเวลา เสนอราคายุติธรรม ตอบสนองความต้องการของลูกค้า และมุ่งมั่นพัฒนาอย่างต่อเนื่อง"',
+        quoteLabel: "นโยบายคุณภาพ",
+        imageAlt:
+          "ทีมงานลองเท็กซ์รับเบอร์อินดัสตรี ณ โรงงานผลิตด้ายยางธรรมชาติในประเทศไทย ก่อตั้งปี 1984",
+      },
+      capacity: {
+        eyebrow: "ขนาดการผลิต",
+        title: "กำลังการผลิต",
+        body: "ลองเท็กซ์ภาคภูมิใจในประวัติศาสตร์อันยาวนานและความเชี่ยวชาญในการผลิตด้ายยางแบบเอ็กซ์ทรูด นับตั้งแต่ก่อตั้งในปี 1984 เราเติบโตอย่างก้าวกระโดด จากกำลังการผลิต 200 ตันต่อเดือนสู่ 1,500 ตันต่อเดือนที่น่าประทับใจ การขยายตัวอันโดดเด่นนี้เป็นเครื่องพิสูจน์ถึงความทุ่มเทของเราในการพัฒนาอย่างต่อเนื่องและการตอบสนองความต้องการที่เพิ่มขึ้นของตลาดโลก",
+        imageAlt:
+          "ถังเก็บน้ำยางธรรมชาติที่โรงงานผลิตด้ายยางแบบเอ็กซ์ทรูดของ Longtex ในประเทศไทย รองรับกำลังการผลิต 1,500 ตันต่อเดือน",
+      },
+      rd: {
+        eyebrow: "นวัตกรรม",
+        title: "การวิจัยและพัฒนา",
+        body: "ที่ลองเท็กซ์รับเบอร์อินดัสตรี ความสามารถในการผลิตของเราขับเคลื่อนด้วยทีมงานที่ยอดเยี่ยมซึ่งมีความรู้และความเชี่ยวชาญเชิงเทคนิคอย่างลึกซึ้ง ผู้เชี่ยวชาญที่มีประสบการณ์ของเราเข้าใจเทคนิคการผลิตด้ายยางอย่างลึกซึ้ง ทำให้เราสามารถผลิตผลิตภัณฑ์ที่เหนือกว่าซึ่งตอบสนองหรือเกินความคาดหวังของลูกค้าอย่างสม่ำเสมอ เราส่งเสริมวัฒนธรรมแห่งความยืดหยุ่นและนวัตกรรม ทำให้เราปรับตัวเข้ากับแนวโน้มตลาดที่เปลี่ยนแปลงและนำเสนอโซลูชันที่ปรับแต่งได้ให้แก่ลูกค้าที่มีค่าของเรา",
+        imageAlt:
+          "ช่างเทคนิคในห้องปฏิบัติการของ Longtex ทำการวิจัยและพัฒนาคุณภาพด้ายยางธรรมชาติแบบเอ็กซ์ทรูดในประเทศไทย",
+      },
+      standards: {
+        eyebrow: "ความน่าเชื่อถือ",
+        title: "มาตรฐานสากล",
+        body: "เราถือว่าความสำเร็จของเรามาจากการมุ่งมั่นในคุณภาพในทุกด้านของการดำเนินงาน ความมุ่งมั่นในการยกระดับคุณภาพผลิตภัณฑ์ส่งผลให้เกิดระบบการจัดการคุณภาพที่แข็งแกร่ง เราภาคภูมิใจที่ได้รับใบรับรอง OekoTex อันทรงเกียรติ ซึ่งรับประกันว่าด้ายยางของเราเป็นไปตามมาตรฐานสากลที่เข้มงวดด้านความปลอดภัยและความยั่งยืน นอกจากนี้ เรายังดำเนินการทดสอบต่างๆ ตามความต้องการของลูกค้าเพื่อมอบโซลูชันที่ตอบโจทย์เฉพาะด้าน",
+        imageAlt:
+          "พื้นที่การผลิตของ Longtex แสดงมาตรฐานความปลอดภัยและคุณภาพการผลิตด้ายยางที่ได้รับการรับรอง ISO และ OekoTex",
+      },
+      green: {
+        eyebrow: "ความยั่งยืน",
+        title: "รักษ์สิ่งแวดล้อม",
+        body: "ที่ลองเท็กซ์ เรามุ่งมั่นลดผลกระทบต่อสิ่งแวดล้อมและเพิ่มผลกระทบเชิงบวกให้มากที่สุด เรากำลังนำพลังงานหมุนเวียน ทั้งพลังงานแสงอาทิตย์และเครื่องผลิตก๊าซชีวภาพ มาใช้ในกระบวนการผลิตเพื่อเพิ่มประสิทธิภาพการใช้พลังงาน ด้วยการใช้พลังงานจากแสงอาทิตย์ควบคู่กับการเปลี่ยนของเสียจากการผลิตให้เป็นไฟฟ้า เราสามารถลดการปล่อยคาร์บอนและมีส่วนร่วมในการสร้างโลกที่สะอาดและเป็นมิตรกับสิ่งแวดล้อมมากขึ้น",
+        imageAlt:
+          "แผงโซลาร์เซลล์บนหลังคาที่จ่ายพลังงานให้การผลิตด้ายยางอย่างยั่งยืนที่โรงงาน Longtex ในประเทศไทย",
+      },
+    },
+    cta: {
+      title: "พร้อมร่วมงานกับเราแล้วหรือยัง?",
+      body: "สำรวจผลิตภัณฑ์ด้ายยางที่ได้รับการรับรอง ISO ครบวงจรของเรา หรือติดต่อทีมงานของเรา",
+      primary: "สำรวจผลิตภัณฑ์",
+      secondary: "ติดต่อเรา",
+    },
+  },
+  applications: {
+    sports: {
+      title: "อุตสาหกรรมกีฬา",
+      description:
+        "สายรัดเอว กางเกงรัดกล้ามเนื้อ เชือกบันจี้ และชุดกีฬาสมรรถนะสูงที่ต้องการความยืดหยุ่นสม่ำเสมอภายใต้แรงกดซ้ำๆ",
+    },
+    food: {
+      title: "อุตสาหกรรมอาหาร",
+      description:
+        "ยางเกรดอาหารสำหรับตาข่ายห่อเนื้อ ห่วงรัดไก่ และบรรจุภัณฑ์ที่ความปลอดภัยและสุขอนามัยเป็นสิ่งที่ต่อรองไม่ได้",
+    },
+    socks: {
+      title: "ขอบถุงเท้า",
+      description:
+        "ด้ายยางขนาดละเอียดที่ออกแบบสำหรับขอบถุงเท้าให้กระชับยาวนาน",
+    },
+    packaging: {
+      title: "บรรจุภัณฑ์",
+      description:
+        "เชือกถักและเส้นเชือกที่สร้างขึ้นสำหรับงานบรรจุภัณฑ์อุตสาหกรรมและค้าปลีกอเนกประสงค์",
+    },
+    medical: {
+      title: "ผลิตภัณฑ์ทางการแพทย์",
+      description:
+        "หน้ากากอนามัย ผ้าถักสำหรับกระดูกและข้อ ถุงน่องรัดกล้ามเนื้อ และผลิตภัณฑ์ยางยืดเกรดการแพทย์",
+    },
+  },
 };
 
 export default th;
